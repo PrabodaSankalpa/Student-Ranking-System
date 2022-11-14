@@ -27,34 +27,33 @@ namespace Console_Application
                 subjects[i,3] = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter IT mark: ");
                 subjects[i,4] = Convert.ToInt32(Console.ReadLine());
+
+                int bestSubjectMarks = subjects[i,1];
                 for(int j = 1; j < 3; j++)
                 {
-                    if(subjects[i,j] < subjects[i,j + 1])
+                    if(bestSubjectMarks < subjects[i, j + 1])
                     {
+                        bestSubjectMarks = subjects[i, j + 1];
                         bestSubject = j;
-                    } else
-                    {
-                        Console.WriteLine("J value is {0}", j);
-                        bestSubject = j - 1;
-                        
                     }
                 }
                 subjects[i,5] = bestSubject;
-                Console.WriteLine("The best subject index is {0}", subjects[i,5]);
             }
             for(int i = 0; i < count; i++)
             {
                 int totalMarks = subjects[i,1] + subjects[i,2] + subjects[i,3] + subjects[i,4];
                 preRank[i] = totalMarks;
             }
+            int maxPreRank = preRank[0];
             for(int i = 0; i < count - 1; i++)
             {
-                if(preRank[i] < preRank[i+1])
+                if(maxPreRank < preRank[i+1])
                 {
+                    maxPreRank = preRank[i+1];
                     maxRank = i + 1;
                 } else
                 {
-                    maxRank = i;
+                    //maxRank = i;
                 }
             }
             subjects[maxRank,6] = 1;
