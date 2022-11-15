@@ -40,11 +40,13 @@ namespace Console_Application
                     }
                 }
                 subjects[i,5] = bestSubject;
+                Logger.WriteLog($"Name: {names[i]} - Maths: {subjects[i,1]} | English: {subjects[i,2]} | Science: {subjects[i,3]} | IT: {subjects[i,4]} Best-Subject: {subjNames[subjects[i,5]]}");
             }
             for(int i = 0; i < count; i++)
             {
                 int totalMarks = subjects[i,1] + subjects[i,2] + subjects[i,3] + subjects[i,4];
                 preRank[i] = totalMarks;
+                Logger.WriteLog($"{names[i]}'s total mark is: {totalMarks}");
             }
             int maxPreRank = preRank[0];
             for(int i = 0; i < count - 1; i++)
@@ -67,6 +69,7 @@ namespace Console_Application
                     if(preRank[j] == i)
                     {
                         subjects[j,6] = rankNumber;
+                        Logger.WriteLog($"{names[j]}'s rank is {rankNumber}");
                         rankNumber++;
                         
                     }
@@ -97,7 +100,7 @@ namespace Console_Application
                     using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
                     {
                         file.WriteLine("{0},{1},{2}", names[i], subjects[i,6], subjNames[subjIndex]);
-                        Logger.WriteLog("CSV file wrote");
+                        Logger.WriteLog("CSV file wrote successful!");
                     }
                     //Console.WriteLine("File is writing...");
                 }
@@ -117,6 +120,7 @@ namespace Console_Application
                 int count = Convert.ToInt32(Console.ReadLine());
                 if (count > 0)
                 {
+                    Logger.WriteLog($"Student count is: {count}");
                     return count;
                 }
             }
