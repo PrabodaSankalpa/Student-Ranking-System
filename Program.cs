@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.IO;
 
 namespace Console_Application
 {
@@ -71,11 +73,38 @@ namespace Console_Application
                 }
             }
 
-            //Console.WriteLine("Student Name\tRank\tBest Subject");
+            try
+                {
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
+                    {
+                        file.WriteLine("Name,Rank,Best-Subject");
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw new ApplicationException("Fail to Write to CSV!", ex);
+                }
+            
+
             for(int i = 0; i < count; i++)
             {
                 int subjIndex = subjects[i,5];
                 Console.WriteLine("{0}\t{1}\t{2}", names[i], subjects[i,6], subjNames[subjIndex]);
+                try
+                {
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
+                    {
+                        file.WriteLine("{0},{1},{2}", names[i], subjects[i,6], subjNames[subjIndex]);
+                    }
+                    //Console.WriteLine("File is writing...");
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw new ApplicationException("Fail to Write to CSV!", ex);
+                }
             }
 
         }
