@@ -97,6 +97,7 @@ namespace Console_Application
                     using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
                     {
                         file.WriteLine("{0},{1},{2}", names[i], subjects[i,6], subjNames[subjIndex]);
+                        Logger.WriteLog("CSV file wrote");
                     }
                     //Console.WriteLine("File is writing...");
                 }
