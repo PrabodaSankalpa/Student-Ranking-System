@@ -18,16 +18,16 @@ namespace Console_Application
 
             for (int i = 0; i < count; i++)
             {
-                Console.WriteLine("Enter student name: ");
+                Console.Write("\nEnter student name: ");
                 names[i] = Console.ReadLine();
                 subjects[i,0] = i;
-                Console.WriteLine("Enter Maths mark: ");
+                Console.Write("Enter Maths mark: ");
                 subjects[i,1] = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Enter English mark: ");
+                Console.Write("Enter English mark: ");
                 subjects[i,2] = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Enter Science mark: ");
+                Console.Write("Enter Science mark: ");
                 subjects[i,3] = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Enter IT mark: ");
+                Console.Write("Enter IT mark: ");
                 subjects[i,4] = Convert.ToInt32(Console.ReadLine());
 
                 int bestSubjectMarks = subjects[i,1];
@@ -61,6 +61,7 @@ namespace Console_Application
                 }
             }
             subjects[maxRank,6] = 1;
+            Logger.WriteLog($"{names[maxRank]}'s rank is 1");
             int rankNumber = 2;
             for(int i = preRank[maxRank] - 1; i >= 0; i--)
             {
@@ -94,7 +95,7 @@ namespace Console_Application
             for(int i = 0; i < count; i++)
             {
                 int subjIndex = subjects[i,5];
-                Console.WriteLine("{0}\t{1}\t{2}", names[i], subjects[i,6], subjNames[subjIndex]);
+                Console.WriteLine("\n{0}\t{1}\t{2}", names[i], subjects[i,6], subjNames[subjIndex]);
                 try
                 {
                     using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
@@ -116,7 +117,7 @@ namespace Console_Application
         {
             while (true)
             {
-                Console.WriteLine("Enter how many student do you enter: ");
+                Console.Write("Enter how many student do you enter: ");
                 int count = Convert.ToInt32(Console.ReadLine());
                 if (count > 0)
                 {
