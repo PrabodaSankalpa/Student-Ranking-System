@@ -22,13 +22,13 @@ namespace Console_Application
                 names[i] = Console.ReadLine();
                 subjects[i,0] = i;
                 Console.Write("Enter Maths mark: ");
-                subjects[i,1] = Convert.ToInt32(Console.ReadLine());
+                subjects[i,1] = getMark();
                 Console.Write("Enter English mark: ");
-                subjects[i,2] = Convert.ToInt32(Console.ReadLine());
+                subjects[i,2] = getMark();
                 Console.Write("Enter Science mark: ");
-                subjects[i,3] = Convert.ToInt32(Console.ReadLine());
+                subjects[i,3] = getMark();
                 Console.Write("Enter IT mark: ");
-                subjects[i,4] = Convert.ToInt32(Console.ReadLine());
+                subjects[i,4] = getMark();
 
                 int bestSubjectMarks = subjects[i,1];
                 for(int j = 1; j < 3; j++)
@@ -77,19 +77,25 @@ namespace Console_Application
                 }
             }
 
-            try
+                var csvFile = new FileInfo(@"./Data-Report.csv");
+                if(csvFile.Length == 0)
                 {
-                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
+                    try
                     {
-                        file.WriteLine("Name,Rank,Best-Subject");
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"./Data-Report.csv", true))
+                        {
+                            file.WriteLine("Name,Rank,Best-Subject");
+                        }
+                        
                     }
-                    
+                    catch (Exception ex)
+                    {
+                        
+                        throw new ApplicationException("Fail to Write to CSV!", ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    
-                    throw new ApplicationException("Fail to Write to CSV!", ex);
-                }
+
+            
             
 
             for(int i = 0; i < count; i++)
@@ -124,6 +130,19 @@ namespace Console_Application
                     Logger.WriteLog($"Student count is: {count}");
                     return count;
                 }
+            }
+        }
+
+        static int getMark()
+        {
+            while(true){
+                int markValue = Convert.ToInt32(Console.ReadLine());
+                if(markValue < 0 || markValue > 100){
+                    Console.Write("Invalid mark! Enter again: ");
+                }else{
+                    return markValue;
+                }
+
             }
         }
     }
